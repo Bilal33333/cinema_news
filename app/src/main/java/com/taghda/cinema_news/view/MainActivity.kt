@@ -1,10 +1,11 @@
-package com.taghda.cinema_news
+package com.taghda.cinema_news.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.taghda.cinema_news.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

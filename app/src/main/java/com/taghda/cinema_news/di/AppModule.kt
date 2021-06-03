@@ -1,11 +1,11 @@
-package com.taghda.cinema_news.repository.local
+package com.taghda.cinema_news.di
 
 import android.content.Context
 import androidx.paging.ExperimentalPagingApi
-import com.taghda.cinema_news.data.ShowImagesRepo
-import com.taghda.cinema_news.data.ShowImagesRepository
-import com.taghda.cinema_news.repository.remote.RemoteInjector
-import com.taghda.cinema_news.repository.remote.ShowApiService
+import com.taghda.cinema_news.repo.paging.ShowImagesRepository
+import com.taghda.cinema_news.db.AppDatabase
+import com.taghda.cinema_news.api.apiHelper
+import com.taghda.cinema_news.api.ShowApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,13 +20,13 @@ object appModule {
 
     @Singleton
     @Provides
-    fun injectShowsApiService(): ShowApiService {
-        return RemoteInjector.getRetrofit().create(ShowApiService::class.java)
+    fun providesShowApiService(): ShowApiService {
+        return apiHelper.getRetrofit().create(ShowApiService::class.java)
     }
 
     @Singleton
     @Provides
-    fun injectDB(@ApplicationContext context: Context): AppDatabase {
+    fun providesDBinstace(@ApplicationContext context: Context): AppDatabase {
         return AppDatabase.getInstance(context)
     }
 

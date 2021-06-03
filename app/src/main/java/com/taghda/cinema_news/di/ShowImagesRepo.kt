@@ -1,4 +1,4 @@
-package com.taghda.cinema_news.data
+package com.taghda.cinema_news.di
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingConfig

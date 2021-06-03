@@ -1,4 +1,4 @@
-package com.taghda.cinema_news.repository.local
+package com.taghda.cinema_news.db
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

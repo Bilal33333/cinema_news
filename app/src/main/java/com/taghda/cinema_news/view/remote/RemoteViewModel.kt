@@ -5,15 +5,12 @@ import androidx.lifecycle.*
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.map
 import androidx.paging.rxjava2.cachedIn
-import com.taghda.cinema_news.data.ShowImagesRepo
-import com.taghda.cinema_news.data.ShowImagesRepository
+import com.taghda.cinema_news.di.ShowImagesRepo
 import com.taghda.cinema_news.model.Search
-import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.Observable
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
-import javax.inject.Inject
 
 @ExperimentalPagingApi
 class RemoteViewModel @ViewModelInject constructor(
@@ -31,6 +28,7 @@ class RemoteViewModel @ViewModelInject constructor(
     }
 
     //rxjava use case
+    @ExperimentalCoroutinesApi
     fun fetchDoggoImagesObservable(): Observable<PagingData<Search>> {
         return repository.letDoggoImagesObservable(
             repository.getDefaultPageConfig(), "indiana"

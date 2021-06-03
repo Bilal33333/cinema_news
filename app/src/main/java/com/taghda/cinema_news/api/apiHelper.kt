@@ -1,27 +1,15 @@
-package com.taghda.cinema_news.repository.remote
+package com.taghda.cinema_news.api
 
-import android.content.Context
-import androidx.paging.ExperimentalPagingApi
-import com.taghda.cinema_news.data.ShowImagesRepo
-import com.taghda.cinema_news.data.ShowImagesRepository
-import com.taghda.cinema_news.repository.local.AppDatabase
-import com.taghda.cinema_news.repository.remote.RemoteInjector.getRetrofit
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import javax.inject.Singleton
 
 const val API_ENDPOINT = "https://omdbapi.com"
 
-object RemoteInjector {
+object apiHelper {
      fun getRetrofit(okHttpClient: OkHttpClient = getOkHttpClient()): Retrofit {
         return Retrofit.Builder()
             .baseUrl(API_ENDPOINT)
@@ -33,10 +21,10 @@ object RemoteInjector {
     private fun getOkHttpNetworkInterceptor(): Interceptor {
         return object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
-                val newRequest =
-                    chain.request().newBuilder()
-      //                      .addHeader(HEADER_API_KEY, API_KEY)
-                            .build()
+                val newRequest = chain
+                    .request()
+                    .newBuilder()
+                    .build()
                 return chain.proceed(newRequest)
             }
         }

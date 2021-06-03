@@ -1,4 +1,4 @@
-package com.taghda.cinema_news.repository.local
+package com.taghda.cinema_news.db
 
 import android.content.Context
 import androidx.room.Database

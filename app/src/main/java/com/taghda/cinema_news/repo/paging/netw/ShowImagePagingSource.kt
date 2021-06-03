@@ -1,11 +1,11 @@
-package com.taghda.cinema_news.data
+package com.taghda.cinema_news.repo.paging.netw
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.taghda.cinema_news.data.ShowImagesRepository.Companion.DEFAULT_PAGE_INDEX
+import com.taghda.cinema_news.repo.paging.ShowImagesRepository.Companion.DEFAULT_PAGE_INDEX
 import com.taghda.cinema_news.model.Search
-import com.taghda.cinema_news.repository.remote.ShowApiService
+import com.taghda.cinema_news.api.ShowApiService
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -14,8 +14,8 @@ import java.io.IOException
  */
 @ExperimentalPagingApi
 class ShowImagePagingSource(val showApiService: ShowApiService,
-                            var show_searcch_key: String) :
-    PagingSource<Int, Search>() {
+                            var show_searcch_key: String
+                            ) : PagingSource<Int, Search>() {
 
 
     /**

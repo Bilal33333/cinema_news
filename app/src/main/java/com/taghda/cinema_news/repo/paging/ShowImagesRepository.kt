@@ -1,13 +1,16 @@
-package com.taghda.cinema_news.data
+package com.taghda.cinema_news.repo.paging
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.paging.*
 import androidx.paging.rxjava2.observable
+import com.taghda.cinema_news.di.ShowImagesRepo
 import com.taghda.cinema_news.model.Search
-import com.taghda.cinema_news.repository.local.AppDatabase
-import com.taghda.cinema_news.repository.remote.ShowApiService
+import com.taghda.cinema_news.db.AppDatabase
+import com.taghda.cinema_news.api.ShowApiService
+import com.taghda.cinema_news.repo.paging.netw.ShowImagePagingSource
+import com.taghda.cinema_news.repo.paging.netw_db.ShowMediator
 import io.reactivex.Observable
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -19,7 +22,7 @@ import javax.inject.Inject
 class ShowImagesRepository @Inject constructor(
     var showApiService: ShowApiService,
     val appDatabase: AppDatabase
-) : ShowImagesRepo{
+) : ShowImagesRepo {
 
     companion object {
         const val DEFAULT_PAGE_INDEX = 1
@@ -35,6 +38,7 @@ class ShowImagesRepository @Inject constructor(
     }
 
     //for rxjava users
+    @ExperimentalCoroutinesApi
     override fun letDoggoImagesObservable(pagingConfig: PagingConfig,
                                           show_searcch_key:String): Observable<PagingData<Search>> {
         return Pager(
@@ -61,10 +65,9 @@ class ShowImagesRepository @Inject constructor(
 
 
     override fun letDoggoImagesFlowDb(pagingConfig: PagingConfig, show_searcch_key: String): Flow<PagingData<Search>> {
-        if (appDatabase == null) throw IllegalStateException("Database is not initialized")
 
-            val pagingSourceFactory = { appDatabase.getShowsDao().getAllShowModel() }
-            var dm = ShowMediator(showApiService, appDatabase, show_searcch_key)
+        val pagingSourceFactory = { appDatabase.getShowsDao().getAllShowModel() }
+            val dm = ShowMediator(showApiService, appDatabase, show_searcch_key)
 
             return Pager(
                 config = pagingConfig,

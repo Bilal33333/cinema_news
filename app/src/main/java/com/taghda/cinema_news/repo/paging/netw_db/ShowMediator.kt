@@ -1,15 +1,15 @@
-package com.taghda.cinema_news.data
+package com.taghda.cinema_news.repo.paging.netw_db
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.taghda.cinema_news.data.ShowImagesRepository.Companion.DEFAULT_PAGE_INDEX
+import com.taghda.cinema_news.repo.paging.ShowImagesRepository.Companion.DEFAULT_PAGE_INDEX
 import com.taghda.cinema_news.model.Search
-import com.taghda.cinema_news.repository.local.AppDatabase
-import com.taghda.cinema_news.repository.local.RemoteKeys
-import com.taghda.cinema_news.repository.remote.ShowApiService
+import com.taghda.cinema_news.db.AppDatabase
+import com.taghda.cinema_news.db.RemoteKeys
+import com.taghda.cinema_news.api.ShowApiService
 import retrofit2.HttpException
 import java.io.IOException
 import java.io.InvalidObjectException
@@ -58,10 +58,8 @@ class ShowMediator(val showApiService: ShowApiService,
             return MediatorResult.Success(endOfPaginationReached = isEndOfList)
         } catch (exception: IOException) {
             return MediatorResult.Error(exception)
-            exception.printStackTrace()
         } catch (exception: HttpException) {
             return MediatorResult.Error(exception)
-            exception.printStackTrace()
         }
     }
 
