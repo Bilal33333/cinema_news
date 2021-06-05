@@ -7,7 +7,7 @@
         android:title="@string/menu_remote" />
     <item
         android:id="@+id/loader"
-        android:icon="@drawable/ic_baseline_loader"
+        android:icon="@drawable/ic_outline_360"
         android:title="@string/menu_loader" />
     <item
         android:id="@+id/room"

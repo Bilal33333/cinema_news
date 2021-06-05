@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">cinema news</string>
-    <string name="menu_remote">Remote</string>
+    <string name="menu_remote">Network</string>
     <string name="menu_loader">Loader</string>
     <string name="menu_room">Room</string>
     <string name="label_title_remote">Paging with remote shows api service as data source</string>
