@@ -5,11 +5,13 @@ This repository is all about Paging3 implementation for various use cases like
 - Paging using network and local db room.
 - Showing footer error view or loading states.
 
-![paging architecture](https://www.google.com/url?sa=i&url=https%3A%2F%2Fdeveloper.android.com%2Ftopic%2Flibraries%2Farchitecture%2Fpaging%2Fv3-overview&psig=AOvVaw0rJH7y2vFOQlwox7ZyvPFu&ust=1625396000329000&source=images&cd=vfe&ved=0CAoQjRxqFwoTCNDN5Y_exvECFQAAAAAdAAAAABAJ)
+![paging architecture](https://developer.android.com/topic/libraries/architecture/images/paging3-library-architecture.svg)
 
 ## CAN you explain with code? OK : 
 
 [showMediator](app/src/main/java/com/taghda/cinema_news/repo/paging/netw_db/ShowMediator.kt): 
+
+```kt
 
 @ExperimentalPagingApi
 class ShowMediator(val showApiService: ShowApiService,
@@ -62,8 +64,11 @@ class ShowMediator(val showApiService: ShowApiService,
         }
     }
     
-    [showImagesRepository](app/src/main/java/com/taghda/cinema_news/repo/paging/ShowImagesRepository.kt) : 
-    
+```
+
+[showImagesRepository](app/src/main/java/com/taghda/cinema_news/repo/paging/ShowImagesRepository.kt) : 
+
+```kt    
         override fun letDoggoImagesFlowDb(pagingConfig: PagingConfig, show_searcch_key: String): Flow<PagingData<Search>> {
 
 
@@ -78,9 +83,11 @@ class ShowMediator(val showApiService: ShowApiService,
             ).flow
 
     }
+```
 
 [RoomViewModel](app/src/main/java/com/taghda/cinema_news/view/room/RoomViewModel.kt) : 
 
+```kt
 class RoomViewModel @ViewModelInject constructor(
     val repository: ShowImagesRepo
 ) :
@@ -124,7 +131,7 @@ class RoomShowImageAdapter :
         recyclerView.adapter = adapter.withLoadStateFooter(loaderStateAdapter)
     }
 }
-
+```
 
     
 ## Author
